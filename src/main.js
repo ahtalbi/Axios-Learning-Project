@@ -1,8 +1,21 @@
-import axios from "axios";
+import { AddRecipe, DeletRecipe, GetRecipes, SearchRecipe } from "./appelsApi.js";
 
-async function getItems() {
-    let res = await axios.get("https://dummyjson.com/recipes");
-    console.log(res.data);
-}
-
-getItems();
+console.log(await GetRecipes());
+console.log(await SearchRecipe("Marg"));
+let recipe = await AddRecipe({
+    name: "Chicken Pasta",
+    ingredients: ["Chicken", "Pasta", "Cream", "Garlic"],
+    instructions: [
+        "Cook the pasta.",
+        "Fry the chicken.",
+        "Add cream and garlic.",
+        "Mix everything together."
+    ],
+    prepTimeMinutes: 15,
+    cookTimeMinutes: 20,
+    servings: 2,
+    difficulty: "Easy",
+    cuisine: "Italian"
+});
+console.log(recipe);
+console.log(await DeletRecipe(1));
