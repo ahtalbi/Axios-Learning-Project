@@ -1,21 +1,16 @@
-import { AddRecipe, DeletRecipe, GetRecipes, SearchRecipe } from "./appelsApi.js";
+import { GetRecipes } from "./appelsApi.js";
+import { CreateRecipeCard } from "./components.js";
+import "./style.css";
 
-console.log(await GetRecipes());
-console.log(await SearchRecipe("Marg"));
-let recipe = await AddRecipe({
-    name: "Chicken Pasta",
-    ingredients: ["Chicken", "Pasta", "Cream", "Garlic"],
-    instructions: [
-        "Cook the pasta.",
-        "Fry the chicken.",
-        "Add cream and garlic.",
-        "Mix everything together."
-    ],
-    prepTimeMinutes: 15,
-    cookTimeMinutes: 20,
-    servings: 2,
-    difficulty: "Easy",
-    cuisine: "Italian"
-});
-console.log(recipe);
-console.log(await DeletRecipe(1));
+const recipeList = document.querySelector("#recipe-list");
+const recipeCount = document.querySelector("#recipe-count");
+const errorMessage = document.querySelector("#error-message");
+const recipes = await GetRecipes();
+
+if (recipes) {
+    recipeCount.textContent = `${recipes.length} recettes`;
+    recipeList.append(...recipes.map(CreateRecipeCard));
+} else {
+    recipeCount.textContent = "0 recettes";
+    errorMessage.classList.remove("hidden");
+}

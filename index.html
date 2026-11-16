@@ -1,17 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>axios-learning-project</title>
-  <link rel="stylesheet" href="./src/style.css">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfaf6" />
+    <meta name="description"
+        content="Découvrez les recettes du club YouCode et choisissez la prochaine recette de l’atelier." />
+    <title>YouCode Recipes</title>
+    <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
+    <header class="border-b bg-white">
+        <div class="mx-auto flex max-w-6xl justify-center px-5 py-5 text-center">
+            <h1 class="font-serif text-4xl font-black tracking-wide">YouCode Recipes</h1>
+        </div>
+    </header>
+    <main class="mx-auto max-w-6xl px-5 py-8">
+        <div class="mb-6 flex items-end justify-between">
+            <h2 class="text-2xl font-bold">Recettes</h2>
+            <p id="recipe-count" class="text-sm text-gray-600">Chargement…</p>
+        </div>
+        <section id="recipe-list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            aria-label="Liste des recettes"></section>
+        <p id="error-message" class="hidden text-center text-red-700">Problem de charger les recettes.</p>
+    </main>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
