@@ -4,7 +4,7 @@ export function CreateRecipeCard(recipe) {
 
     const image = document.createElement("img");
     image.className = "h-48 w-full object-cover";
-    image.src = recipe.image;
+    image.src = recipe.image || "https://placehold.co/600x400?text=Recette";
     image.alt = recipe.name;
     image.loading = "lazy";
 

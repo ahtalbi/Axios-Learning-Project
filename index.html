@@ -19,12 +19,58 @@
         </div>
     </header>
     <main class="mx-auto max-w-6xl px-5 py-8">
-        <div class="mb-6 flex items-end justify-between">
+        <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
             <h2 class="text-2xl font-bold">Recettes</h2>
             <p id="recipe-count" class="text-sm text-gray-600">Chargement…</p>
         </div>
+        <section class="mb-8 rounded-lg border border-gray-200 bg-white p-5 shadow-sm" aria-label="Rechercher une recette">
+            <form id="search-form" class="flex flex-col gap-3 sm:flex-row">
+                <label class="sr-only" for="search-input">Mot-clé</label>
+                <input id="search-input" name="q" type="search" placeholder="Rechercher par mot-cle …"
+                    class="min-w-0 flex-1 rounded-md border border-gray-300 px-4 py-2 focus:border-amber-600 focus:outline-none" />
+                <button type="submit" class="rounded-md bg-gray-900 px-5 py-2 font-semibold text-white hover:bg-gray-700">Rechercher</button>
+                <button id="show-all-button" type="button" class="hidden rounded-md border border-gray-300 px-5 py-2 font-semibold hover:bg-gray-50">Toutes les recettes</button>
+            </form>
+        </section>
+        <section class="mb-8 rounded-lg border border-gray-200 bg-white p-5 shadow-sm" aria-labelledby="add-recipe-title">
+            <h2 id="add-recipe-title" class="mb-4 text-xl font-bold">Proposer une recette</h2>
+            <form id="add-recipe-form" class="grid grid-cols-1 gap-4 sm:grid-cols-2" novalidate>
+                <div>
+                    <label for="recipe-name" class="mb-1 block text-sm font-medium">Nom</label>
+                    <input id="recipe-name" name="name" type="text" minlength="3" maxlength="60" required class="w-full rounded-md border border-gray-300 px-3 py-2" />
+                    <p id="name-error" class="mt-1 hidden text-sm text-red-700"></p>
+                </div>
+                <div>
+                    <label for="recipe-cuisine" class="mb-1 block text-sm font-medium">Cuisine</label>
+                    <input id="recipe-cuisine" name="cuisine" type="text" required class="w-full rounded-md border border-gray-300 px-3 py-2" />
+                    <p id="cuisine-error" class="mt-1 hidden text-sm text-red-700"></p>
+                </div>
+                <div>
+                    <label for="recipe-difficulty" class="mb-1 block text-sm font-medium">Difficulté</label>
+                    <select id="recipe-difficulty" name="difficulty" required class="w-full rounded-md border border-gray-300 px-3 py-2">
+                        <option value="">Choisir une difficulté</option>
+                        <option value="Easy">Facile</option><option value="Medium">Moyenne</option><option value="Hard">Difficile</option>
+                    </select>
+                    <p id="difficulty-error" class="mt-1 hidden text-sm text-red-700"></p>
+                </div>
+                <div>
+                    <label for="recipe-time" class="mb-1 block text-sm font-medium">Temps (minutes)</label>
+                    <input id="recipe-time" name="prepTimeMinutes" type="number" min="1" max="300" required class="w-full rounded-md border border-gray-300 px-3 py-2" />
+                    <p id="prepTimeMinutes-error" class="mt-1 hidden text-sm text-red-700"></p>
+                </div>
+                <div class="sm:col-span-2">
+                    <button id="add-recipe-button" type="submit" class="rounded-md bg-amber-700 px-5 py-2 font-semibold text-white hover:bg-amber-800">Ajouter la recette</button>
+                    <p id="add-success" role="status" class="mt-2 hidden text-sm font-medium text-green-700"></p>
+                    <p id="add-error" role="alert" class="mt-2 hidden text-sm text-red-700"></p>
+                </div>
+            </form>
+        </section>
         <section id="recipe-list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             aria-label="Liste des recettes"></section>
+        <div id="empty-state" class="hidden py-8 text-center">
+            <p class="mb-4 text-gray-700">Aucune recette trouvée</p>
+            <button id="empty-show-all-button" type="button" class="rounded-md bg-gray-900 px-5 py-2 font-semibold text-white hover:bg-gray-700">Revoir toutes les recettes</button>
+        </div>
         <p id="error-message" class="hidden text-center text-red-700">Problem de charger les recettes.</p>
     </main>
     <script type="module" src="/src/main.js"></script>
