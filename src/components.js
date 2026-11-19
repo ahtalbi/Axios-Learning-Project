@@ -27,8 +27,14 @@ export function CreateRecipeCard(recipe) {
     const prepTime = document.createElement("span");
     prepTime.textContent = `${recipe.prepTimeMinutes} min`;
 
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.dataset.recipeId = recipe.id;
+    deleteButton.textContent = "Supprimer";
+    deleteButton.className = "mt-3 rounded-md border border-red-300 px-3 py-1 text-sm font-semibold text-red-700 hover:bg-red-50";
+
     details.append(difficulty, prepTime);
-    info.append(name, cuisine, details);
+    info.append(name, cuisine, details, deleteButton);
     card.append(image, info);
     return card;
 }

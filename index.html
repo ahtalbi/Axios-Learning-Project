@@ -71,7 +71,12 @@
             <p class="mb-4 text-gray-700">Aucune recette trouvée</p>
             <button id="empty-show-all-button" type="button" class="rounded-md bg-gray-900 px-5 py-2 font-semibold text-white hover:bg-gray-700">Revoir toutes les recettes</button>
         </div>
-        <p id="error-message" class="hidden text-center text-red-700">Problem de charger les recettes.</p>
+        <div id="loading-message" class="hidden py-6 text-center text-gray-600" role="status">Chargement des recettes…</div>
+        <div id="error-message" class="hidden py-6 text-center" role="alert">
+            <p id="error-text" class="mb-3 text-red-700"></p>
+            <button id="retry-button" type="button" class="rounded-md bg-gray-900 px-5 py-2 font-semibold text-white hover:bg-gray-700">Réessayer</button>
+        </div>
+        <p id="delete-message" class="hidden mt-4 text-sm font-medium text-green-700" role="status"></p>
     </main>
     <script type="module" src="/src/main.js"></script>
 </body>

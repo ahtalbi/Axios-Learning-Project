@@ -8,6 +8,13 @@ const RecipesApi = axios.create({
     maxBodyLength: 10 * 1024 * 1024
 });
 
+function ApiError(err) {
+    if (!err.response) return "unreachable";
+    if (err.response.status === 404) return "not-found";
+    if (err.response.status >= 500) return "server";
+    return "server";
+}
+
 RecipesApi.interceptors.request.use((config) => {
   console.log(`→ ${config.method?.toUpperCase()} ${config.url}`);
   return config;
@@ -16,39 +23,39 @@ RecipesApi.interceptors.request.use((config) => {
 export async function GetRecipes() {
     try {
         let res = await RecipesApi.get("/recipes", {params: {limit : 12}});
-        return res.data.recipes;
+        return { data: res.data.recipes };
     } catch (err) {
         console.error(err.message);
-        return null;
+        return { error: ApiError(err) };
     }
 }
 
 export async function SearchRecipe(search) {
     try {
         let res = await RecipesApi.get("/recipes/search", { params: { q: search } });
-        return res.data.recipes;
+        return { data: res.data.recipes };
     } catch (err) {
         console.error(err.message);
-        return null;
+        return { error: ApiError(err) };
     }
 }
 
 export async function AddRecipe(recipe) {
     try {
         let res = await RecipesApi.post("/recipes/add", recipe);
-        return res.data;
+        return { data: res.data };
     } catch (err) {
         console.error(err.message);
-        return null;
+        return { error: ApiError(err) };
     }
 }
 
-export async function DeletRecipe(id) {
+export async function DeleteRecipe(id) {
     try {
         let res = await RecipesApi.delete(`/recipes/${id}`);
-        return res.data;
+        return { data: res.data };
     } catch (err) {
         console.error(err.message);
-        return null;
+        return { error: ApiError(err) };
     }
 }
